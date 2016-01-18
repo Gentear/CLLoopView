@@ -128,9 +128,14 @@
  */
 - (void)startTimer
 {
-    self.timer =  [NSTimer scheduledTimerWithTimeInterval:0.5 target:self selector:@selector(runTimePage) userInfo:nil repeats:YES];
+    dispatch_async(dispatch_get_global_queue(0, 0), ^{
+    self.timer = [NSTimer scheduledTimerWithTimeInterval:1 target:self selector:@selector(runTimePage) userInfo:nil repeats:true];
+    [[NSRunLoop currentRunLoop] run];
     
-    [[NSRunLoop mainRunLoop] addTimer:self.timer forMode:NSRunLoopCommonModes];
+});
+//    self.timer =  [NSTimer scheduledTimerWithTimeInterval:0.5 target:self selector:@selector(runTimePage) userInfo:nil repeats:YES];
+//    
+//    [[NSRunLoop mainRunLoop] addTimer:self.timer forMode:NSRunLoopCommonModes];
 }
 -(void)stopTimer
 {
