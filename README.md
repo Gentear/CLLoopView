@@ -1,4 +1,4 @@
-# CLCircularlyView
+# CLLoopView
 一个自动循环滚动视图
 
 使用方法
@@ -6,7 +6,7 @@
 导入头文件
 
 
-#import "CLCircularlyView.h"
+#import "CLLoopView.h"
 
  //必须这个方法初始化
  
