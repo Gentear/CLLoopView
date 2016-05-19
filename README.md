@@ -9,9 +9,13 @@
 
  //必须这个方法初始化
  
- 
-    CLCircularlyView *cl = [[CLCircularlyView alloc]initWithFrame:CGRectMake(0, 0, 375, 300)];
-    
-    cl.imageArray = @[@"123",@"bg",@"bg2",@"bg3"];
-    
-    [self.view addSubview:cl];
+  CLLoopView *loop = [[CLLoopView alloc]initWithFrame:CGRectMake(0, 0, 375, 300)];
+        loop.imageArray = @[@"123",@"bg",@"bg2",@"bg3"];
+        loop.delegate = self;
+        [self.view addSubview:loop];
+
+
+代理方法如下
+- (void)tapClickWithInterger:(NSInteger)index{
+    NSLog(@"%ld",index);
+}
