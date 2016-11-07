@@ -91,6 +91,12 @@
 - (void)setInterval:(NSInteger)interval{
     _interval = interval;
 }
+- (NSTimer *)timer{
+    if (_timer == nil) {
+        _timer = [NSTimer scheduledTimerWithTimeInterval:3 target:self selector:@selector(runTimePage) userInfo:nil repeats:true];
+    }
+    return _timer;
+}
 #pragma mark - 定时器方法
 /**
  *  timer
@@ -98,7 +104,7 @@
 - (void)startTimer
 {
     dispatch_async(dispatch_get_global_queue(0, 0), ^{
-        self.timer = [NSTimer scheduledTimerWithTimeInterval:1 target:self selector:@selector(runTimePage) userInfo:nil repeats:true];
+        [self timer];
         [[NSRunLoop currentRunLoop] run];
         
     });
@@ -179,5 +185,10 @@
     if (currentPage == self.imageArray.count - 1) {
         [self.collectionView setContentOffset:CGPointMake(selfWidth,0) animated:NO];
     }
+}
+- (void)dealloc{
+    _collectionView.delegate = nil;
+    _collectionView.dataSource = nil;
+    _timer = nil;
 }
 @end
