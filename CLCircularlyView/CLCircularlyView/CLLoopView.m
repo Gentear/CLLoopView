@@ -12,6 +12,7 @@
 #define selfHeight self.frame.size.height
 #import "CLLoopView.h"
 #import "CLLoopCell.h"
+
 @interface CLLoopView ()<UICollectionViewDataSource,UICollectionViewDelegate>
 @property (weak,nonatomic) UICollectionView *collectionView;
 @property (nonatomic,strong)NSTimer * timer;
@@ -30,7 +31,8 @@
 //创建cell
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath{
     CLLoopCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"CLLoopCell" forIndexPath:indexPath];
-    cell.cellImage.image = [UIImage imageNamed:self.imageArray[indexPath.row]];
+    NSString *img = self.imageArray[indexPath.row];
+    cell.cellImage.image = [UIImage imageNamed:img];
     return cell;
 }
 #pragma mark - 懒加载
@@ -189,6 +191,8 @@
 - (void)dealloc{
     _collectionView.delegate = nil;
     _collectionView.dataSource = nil;
+    [_timer invalidate];
     _timer = nil;
 }
+
 @end
